@@ -512,13 +512,12 @@ ul {
 
 .about-image {
   position: relative;
-  border-radius: 16px;
-  overflow: hidden;
 }
 
 .about-image-inner {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  min-height: 400px;
+  padding: 40px;
   background: linear-gradient(135deg, var(--navy-800), var(--navy-600));
   border-radius: 16px;
   display: flex;
@@ -560,41 +559,47 @@ ul {
   letter-spacing: 3px;
 }
 
-.about-image .float-badge {
+.inner-badge {
   position: absolute;
-  bottom: -16px;
-  right: -16px;
+  bottom: 24px;
+  right: 24px;
   background: var(--white);
   border-radius: 12px;
-  padding: 16px 24px;
-  box-shadow: var(--shadow-lg);
+  padding: 12px 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   display: flex;
   align-items: center;
   gap: 12px;
+  text-align: left;
+  max-width: 90%;
   z-index: 2;
 }
 
-.float-badge .badge-icon {
-  width: 48px;
-  height: 48px;
+.inner-badge .badge-icon {
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, var(--gold-500), var(--gold-300));
-  border-radius: 10px;
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.2rem;
+  flex-shrink: 0;
 }
 
-.float-badge .badge-text strong {
+.inner-badge .badge-text strong {
   display: block;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--navy-800);
+  line-height: 1.2;
 }
 
-.float-badge .badge-text span {
-  font-size: 0.78rem;
+.inner-badge .badge-text span {
+  font-size: 0.75rem;
   color: var(--gray-500);
 }
+
+
 
 .about-content p {
   color: var(--gray-600);
@@ -1173,6 +1178,8 @@ ul {
   margin-bottom: 16px;
 }
 
+
+
 .footer-logo-img {
   width: 36px;
   height: 36px;
@@ -1297,16 +1304,22 @@ ul {
     grid-template-columns: 1fr 1fr;
   }
 
-  .about-image .float-badge {
+
+  .about-image-inner {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .inner-badge {
     position: relative;
     bottom: auto;
     right: auto;
-    margin-top: -20px;
-    margin-left: 20px;
-    margin-right: 20px;
+    margin-top: 32px;
     width: auto;
-    justify-content: center;
+    align-self: center;
+    max-width: 100%;
   }
+
 
   .about-highlights {
     grid-template-columns: 1fr;
