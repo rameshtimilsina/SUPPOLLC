@@ -1297,6 +1297,17 @@ ul {
     grid-template-columns: 1fr 1fr;
   }
 
+  .about-image .float-badge {
+    position: relative;
+    bottom: auto;
+    right: auto;
+    margin-top: -20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: auto;
+    justify-content: center;
+  }
+
   .about-highlights {
     grid-template-columns: 1fr;
   }
