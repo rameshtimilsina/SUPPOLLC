@@ -40,8 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       const targetId = anchor.getAttribute('href');
-      if (targetId === '#') return;
       e.preventDefault();
+      
+      if (targetId === '#') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        history.pushState(null, null, window.location.pathname + window.location.search);
+        return;
+      }
+      
       const target = document.querySelector(targetId);
       if (target) {
         const offset = 80;
