@@ -5,6 +5,10 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
   // --- Navbar scroll effect ---
   const navbar = document.querySelector('.navbar');
   const handleScroll = () => {
@@ -44,11 +48,6 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (targetId === '#') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        
-        // Delay history update to prevent Safari scroll-jumping bug during smooth scroll
-        setTimeout(() => {
-          history.replaceState(null, null, window.location.pathname + window.location.search);
-        }, 800);
         return;
       }
       
