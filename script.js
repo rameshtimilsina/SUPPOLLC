@@ -44,7 +44,11 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if (targetId === '#') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
-        history.pushState(null, null, window.location.pathname + window.location.search);
+        
+        // Delay history update to prevent Safari scroll-jumping bug during smooth scroll
+        setTimeout(() => {
+          history.replaceState(null, null, window.location.pathname + window.location.search);
+        }, 800);
         return;
       }
       
