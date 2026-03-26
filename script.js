@@ -40,6 +40,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- Custom Smooth Scroll to bypass Safari distance bugs ---
+  const customSmoothScrollTo = (targetPosition) => {
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const duration = 800; // 800ms
+    let start = null;
+
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const t = Math.min(progress / duration, 1);
+      // Ease in-out cubic
+      const ease = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+      
+      window.scrollTo(0, startPosition + (distance * ease));
+
+      if (t < 1) {
+        requestAnimationFrame(step);
+      } else {
+        window.scrollTo(0, targetPosition);
+      }
+    };
+    requestAnimationFrame(step);
+  };
+
   // --- Smooth scroll for anchor links ---
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
@@ -47,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       
       if (targetId === '#') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        customSmoothScrollTo(0);
         return;
       }
       
@@ -55,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (target) {
         const offset = 80;
         const position = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: position, behavior: 'smooth' });
+        customSmoothScrollTo(position);
       }
     });
   });
